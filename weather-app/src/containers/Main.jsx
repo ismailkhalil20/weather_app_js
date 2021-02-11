@@ -3,7 +3,19 @@ import axios from "axios";
 
 function App() {
   const [data, setData] = useState([]);
+  const [broadcast, setbroadcast] = useState([]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await axios(
+        `https://www.metaweather.com/api/location/2487956/`
+      );
+      console.log(result);
+      setbroadcast(result.broadcast);
+    };
+
+    fetchData();
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       //axios use when you want to fetch data from external resource
