@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import DetailData from './../components/DetailData/DetailData';
 import MainData from "../components/MainData/MainData";
+import SearchForm from "../components/SearchForm/SearchForm";
 
 function App() {
   const [data, setData] = useState([]);
   const [broadcast, setbroadcast] = useState([]);
+  const [City, setCity] = useState();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -18,6 +20,7 @@ function App() {
 
     fetchData();
   }, []);
+
   useEffect(() => {
     const fetchData = async () => {
       //axios use when you want to fetch data from external resource
@@ -26,7 +29,6 @@ function App() {
         //here you should enter the city name and know
       );
       console.log(result);
-
       setData(result.data);
     };
 
@@ -44,6 +46,7 @@ function App() {
         </ul>
       ))}
       <MainData />
+      <SearchForm City={City} setCity={setCity}/>
       <DetailData />
     </div>
   );
