@@ -9,7 +9,7 @@ function App() {
       //axios use when you want to fetch data from external resource
       const result = await axios(
         `https://www.metaweather.com/api/location/search/?query=london`
-        //here you should enter the city name
+        //here you should enter the city name and know
       );
       console.log(result);
 
