@@ -9,6 +9,7 @@ export default function MainData() {
                 <p>18:00 - Tue 25 Jan 20</p>
             </div>
             {/* add an svg here to show the weather condition */}
+            
         </div>
     )
 }
