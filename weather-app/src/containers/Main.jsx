@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import DetailData from './../components/DetailData/DetailData';
+import MainData from "../components/MainData/MainData";
 
 function App() {
   const [data, setData] = useState([]);
@@ -29,6 +31,8 @@ function App() {
           <li>{cityinfo.latt_long}</li>
         </ul>
       ))}
+      <MainData />
+      <DetailData />
     </div>
   );
 }
