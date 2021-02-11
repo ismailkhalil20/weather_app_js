@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import DetailData from './../components/DetailData/DetailData';
-import MainData from "../components/MainData/MainData";
-import SearchForm from "../components/SearchForm/SearchForm";
+import DetailData from '../../components/DetailData/DetailData';
+import MainData from "../../components/MainData/MainData";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import Cards from "../Cards/Cards";
 
 function App() {
   const [data, setData] = useState([]);
@@ -46,6 +47,7 @@ function App() {
         </ul>
       ))}
       <MainData />
+      <Cards />
       <SearchForm City={City} setCity={setCity}/>
       <DetailData />
     </div>
