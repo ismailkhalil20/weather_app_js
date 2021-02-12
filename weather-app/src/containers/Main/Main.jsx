@@ -1,38 +1,48 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import DetailData from './../components/DetailData/DetailData';
-import MainData from "../components/MainData/MainData";
-import SearchForm from "../components/SearchForm/SearchForm";
+import DetailData from '../../components/DetailData/DetailData';
+import MainData from "../../components/MainData/MainData";
+import SearchForm from "../../components/SearchForm/SearchForm";
+import Cards from "../Cards/Cards";
 
 function App() {
   const [data, setData] = useState([]);
   const [broadcast, setbroadcast] = useState([]);
-  const [City, setCity] = useState();
+  const [City, setCity] = useState("Baghdad");
+  const [Search, setSearch] = useState("");
+
+
+  const CitySearch = (event) => {
+    setSearch(event.target.value)
+  }
+
+  const handlechange = (e) => {
+    e.preventDefault()
+    setCity(Search)
+  }
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(
-        `https://www.metaweather.com/api/location/2487956/`
-      );
-      console.log(result);
-      setbroadcast(result.broadcast);
-    };
+      const result = await axios
+      .get(`https://www.metaweather.com/api/location/search/?query=${City}`);
 
-    fetchData();
-  }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      //axios use when you want to fetch data from external resource
-      const result = await axios(
-        `https://www.metaweather.com/api/location/search/?query=london`
-        //here you should enter the city name and know
-      );
-      console.log(result);
       setData(result.data);
     };
 
+    const fetchDetails = async () => {
+      const result = await axios
+      .get(`https://www.metaweather.com/api/location/2487956/`);
+
+      setbroadcast(result.data);
+    };
+
     fetchData();
+    fetchDetails();
+    
+  }, [City]);
+
+  useEffect(() => {
+    
   }, []);
 
   return (
@@ -46,7 +56,8 @@ function App() {
         </ul>
       ))}
       <MainData />
-      <SearchForm City={City} setCity={setCity}/>
+      <Cards />
+      <SearchForm handlechange={handlechange} CitySearch={CitySearch} />
       <DetailData />
     </div>
   );

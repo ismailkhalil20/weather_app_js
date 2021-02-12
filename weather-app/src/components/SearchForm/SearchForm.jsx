@@ -1,15 +1,15 @@
 import React from 'react'
 
-export default function SearchForm({City, setCity}) {
+export default function SearchForm({ handlechange, CitySearch}) {
     return (
         <div>
             <form>
                 <input
                     name="cityname"
                     type="text"
-                    value={City}
-                    onChange={() => {setCity(City)}} />
-                <input type="submit" value="Submit" />
+                    onChange={CitySearch}
+                    />
+                <input type="submit" value="Submit" onClick={handlechange} />
             </form>
         </div>
     )
