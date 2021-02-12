@@ -1,14 +1,28 @@
 import React from 'react'
 
-export default function MainData() {
+export default function MainData({today, City}) {
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit"
+};
+    const today1  = new Date(today[0].created);
+
+
     return (
         <div>
-            <span>24&deg;</span>
+            <span>{Math.floor(today[0].the_temp)}&deg;</span>
             <div>
-                <h5>Paris</h5>
-                <p>18:00 - Tue 25 Jan 20</p>
+                <h5>{City}</h5>
+                <p>{today1.toLocaleDateString("en-US", options)}</p>
+              
             </div>
-            {/* add an svg here to show the weather condition */}
+            {/* add an svg here to show the weather condition
+            
+
+            
+            
+            */}
             
         </div>
     )
