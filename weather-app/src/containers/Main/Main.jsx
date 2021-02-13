@@ -7,9 +7,10 @@ import Cards from "../Cards/Cards";
 
 function App() {
   const [data, setData] = useState([]);
-  const [broadcast, setbroadcast] = useState([]);
+  const [broadcast, setbroadcast] = useState({});
   const [City, setCity] = useState("Baghdad");
   const [Search, setSearch] = useState("");
+  const [broadcasttrue, setbroadcasttrue] = useState(false);
 
 
   const CitySearch = (event) => {
@@ -19,46 +20,33 @@ function App() {
   const handlechange = (e) => {
     e.preventDefault()
     setCity(Search)
+    setSearch("")
   }
 
   useEffect(() => {
-    const fetchData = async () => {
-      const result = await axios
-      .get(`https://www.metaweather.com/api/location/search/?query=${City}`);
-
-      setData(result.data);
-    };
-
-    const fetchDetails = async () => {
-      const result = await axios
-      .get(`https://www.metaweather.com/api/location/2487956/`);
-
-      setbroadcast(result.data);
-    };
-
-    fetchData();
-    fetchDetails();
     
-  }, [City]);
-
-  useEffect(() => {
+       axios.get(`https://www.metaweather.com/api/location/search/?query=${City}`)
+      .then(response => {
+        setData(response.data)
+        return response.data[0].woeid
+      })
+      .then((woeid) => axios.get(`https://www.metaweather.com/api/location/${woeid}/`))
+      .then(response => {
+        setbroadcast(response.data);
+        setbroadcasttrue(true);
+      });
+    }
     
-  }, []);
+  , [City] );
+
+ 
 
   return (
     <div>
-      {data.map((cityinfo) => (
-        <ul>
-          <li>{cityinfo.title}</li>
-          <li>{cityinfo.location_type}</li>
-          <li>{cityinfo.woeid}</li>
-          <li>{cityinfo.latt_long}</li>
-        </ul>
-      ))}
-      <MainData />
-      <Cards />
-      <SearchForm handlechange={handlechange} CitySearch={CitySearch} />
-      <DetailData />
+      { broadcasttrue ? <MainData today={broadcast.consolidated_weather} City={data[0].title} /> : null }
+      { broadcasttrue ? <Cards ConsolidatedWeather={broadcast.consolidated_weather} /> : null }
+      <SearchForm Search={Search} handlechange={handlechange} CitySearch={CitySearch} />
+      { broadcasttrue ? <DetailData ConsolidatedWeather={broadcast.consolidated_weather} /> : null }
     </div>
   );
 }
@@ -75,6 +63,16 @@ function App() {
    
     }
   
+    {data.map((cityinfo) => (
+        <ul>
+          <li>{cityinfo.title}</li>
+          <li>{cityinfo.location_type}</li>
+          <li>{cityinfo.woeid}</li>
+          <li>{cityinfo.latt_long}</li>
+        </ul>
+      ))}
+
+
  THIS IS FOR A SEARCH BUTTON
   <input
           type="text"

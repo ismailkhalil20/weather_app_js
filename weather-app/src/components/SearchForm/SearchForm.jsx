@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function SearchForm({ handlechange, CitySearch}) {
+export default function SearchForm({Search, handlechange, CitySearch}) {
     return (
         <div>
             <form>
@@ -8,6 +8,7 @@ export default function SearchForm({ handlechange, CitySearch}) {
                     name="cityname"
                     type="text"
                     onChange={CitySearch}
+                    value={Search}
                     />
                 <input type="submit" value="Submit" onClick={handlechange} />
             </form>

@@ -1,24 +1,24 @@
 import React from 'react'
 
-export default function DetailData() {
+export default function DetailData({ConsolidatedWeather}) {
     return (
         <div>
             <h4>Weather Detials</h4>
             <div>
                 <p>Humidity</p>
-                <p>50%</p>
+                <p>{ConsolidatedWeather[0].humidity}</p>
             </div>
             <div>
                 <p>Visibility</p>
-                <p>6km</p>
+                <p>{Math.floor(ConsolidatedWeather[0].visibility)}</p>
             </div>
             <div>
-                <p>UV</p>
-                <p>Weak</p>
+                <p>Wind Speed</p>
+                <p>{Math.floor(ConsolidatedWeather[0].wind_speed)}</p>
             </div>
             <div>
-                <p>Wind</p>
-                <p>3 km/h</p>
+                <p>Wind Direction Compass</p>
+                <p>{ConsolidatedWeather[0].wind_direction_compass}</p>
             </div>
         </div>
     )
