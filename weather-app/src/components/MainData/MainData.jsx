@@ -10,12 +10,11 @@ export default function MainData({today, City}) {
 
 
     return (
-        <div>
-            <span>{Math.floor(today[0].the_temp)}&deg;</span>
-            <div>
-                <h5>{City}</h5>
-                <p>{today1.toLocaleDateString("en-US", options)}</p>
-              
+        <div className="text-white space-x-2 row-start-1 row-end-4 col-span-4 flex items-end md:pl-20">
+            <span className="text-7xl">{Math.floor(today[0].the_temp)}&deg;</span>
+            <div className="">
+                <h5 className="text-3xl">{City}</h5>
+                <p className="text-sm">{today1.toLocaleDateString("en-US", options)}</p>
             </div>
             {/* add an svg here to show the weather condition
             
