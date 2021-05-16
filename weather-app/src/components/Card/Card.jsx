@@ -1,24 +1,25 @@
-import axios from 'axios';
 import React, {useState, useEffect} from 'react'
+import Image from '../../assests/Anonymous_simple_weather_symbols_11.svg'
 
 export default function Card({weather_state_abbr, temp, dayoftheweek}) {
     
- //i am going to fetch the svgs from the api here, you can speak i can hear you
- //yes thats all, do you have diffrent idea or you want to show something else?
- const [Svg, setSvg] = useState();
+ const [WeatherCondition, setWeatherCondition] = useState();
  
  useEffect(() => {
-    axios.get(`https://www.metaweather.com/static/img/weather/${weather_state_abbr}.svg`)
-    .then(response => setSvg(response.data))
+    fetch(`https://www.metaweather.com/static/img/weather/${weather_state_abbr}.svg`)
+    .then(response => response.text())
+    .then(response => {
+        setWeatherCondition(response) })
+    
  },[])
-  //how to use an svg in react?
-  //did you set update setSvg?
 
  return (
         <div>
-            <h5>{dayoftheweek}</h5>
-            <img src={Svg} alt="weather" />
-            <p>{temp}&deg;C</p>
+            <img src={Image} alt="weather condition" className="h-20" />
+            <div className="flex justify-between">
+                <p>{dayoftheweek.slice(0, 3)}</p>
+                <span>{temp}&deg;C</span>
+            </div>
         </div>
     )
 }

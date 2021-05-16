@@ -42,11 +42,17 @@ function App() {
  
 
   return (
-    <div>
-      { broadcasttrue ? <MainData today={broadcast.consolidated_weather} City={data[0].title} /> : null }
-      { broadcasttrue ? <Cards ConsolidatedWeather={broadcast.consolidated_weather} /> : null }
-      <SearchForm Search={Search} handlechange={handlechange} CitySearch={CitySearch} />
-      { broadcasttrue ? <DetailData ConsolidatedWeather={broadcast.consolidated_weather} /> : null }
+    <div className="bg-cold bg-cover h-screen" >
+      <div className="grid grid-cols-6 grid-rows-4 gap-2 md:h-screen">
+          
+            { broadcasttrue ? <MainData today={broadcast.consolidated_weather} City={data[0].title} /> : null }
+            { broadcasttrue ? <Cards ConsolidatedWeather={broadcast.consolidated_weather} /> : null }
+        
+        <div className="col-span-2 p-8 opacity-90 row-span-4 bg-purple-600 bg-opacity-25 flex flex-col justify-around">
+          <SearchForm Search={Search} handlechange={handlechange} CitySearch={CitySearch} />
+          { broadcasttrue ? <DetailData ConsolidatedWeather={broadcast.consolidated_weather} /> : null }
+        </div>
+      </div>
     </div>
   );
 }
