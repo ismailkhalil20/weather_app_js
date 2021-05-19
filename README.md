@@ -6,7 +6,7 @@ Weather application allow you to see the weather condition on many places around
 
 ### Screenshot
 
-![image](https://user-images.githubusercontent.com/68775635/118402935-c905e380-b674-11eb-86ff-7a210d520107.png
+![image](https://user-images.githubusercontent.com/68775635/118402935-c905e380-b674-11eb-86ff-7a210d520107.png)
 
 ### Built with
 
